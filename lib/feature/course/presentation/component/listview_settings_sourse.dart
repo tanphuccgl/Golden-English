@@ -30,17 +30,16 @@ class _ListViewSettingCourseState extends State<ListViewSettingCourse> {
   Widget build(BuildContext context) {
     ItemsCourse item1 = new ItemsCourse(
         title: "Show Course",
-        subtitle: "March, Wednesday",
-        event: "${""} Classes",
+        subtitle: "View current courses and edit courses",
         img: "assets/icons/showcourse.png",
         function: () {
           Navigator.push(context, MaterialPageRoute(builder: (context)=>ShowCoursePage()));
         });
 
     ItemsCourse item2 = new ItemsCourse(
-      title: "Add Course",
-      subtitle: "Bocali, Apple",
-      event: "4 Items",
+      title: "Create Course",
+      subtitle: "Add a new Course",
+
       img: "assets/icons/add.png",function: (){
       Navigator.push(context, MaterialPageRoute(builder: (context)=>AddCoursePage()));
     },
@@ -48,34 +47,14 @@ class _ListViewSettingCourseState extends State<ListViewSettingCourse> {
 
     ItemsCourse item3 = new ItemsCourse(
       title: "Search",
-      subtitle: "Lucy Mao going to Office",
-      event: "",
+      subtitle: "Search courses by name",
+
       img: "assets/icons/search.png",function: (){
       Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchCoursePage()));
     },
     );
 
-    ItemsCourse item4 = new ItemsCourse(
-      title: "Activity",
-      subtitle: "Rose favirited your Post",
-      event: "",
-      img: "assets/logos/ic_launcher.png",
-    );
-
-    ItemsCourse item5 = new ItemsCourse(
-      title: "To do",
-      subtitle: "Homework, Design",
-      event: "4 Items",
-      img: "assets/logos/ic_launcher.png",
-    );
-
-    ItemsCourse item6 = new ItemsCourse(
-      title: "Settings",
-      subtitle: "",
-      event: "2 Items",
-      img: "assets/logos/ic_launcher.png",
-    );
-    List<ItemsCourse> myList = [item1, item2, item3, item4, item5, item6];
+    List<ItemsCourse> myList = [item1, item2, item3,];
 Size size= MediaQuery.of(context).size;
     return ListView.builder(
       itemBuilder: (context, index) {
@@ -113,11 +92,7 @@ Size size= MediaQuery.of(context).size;
                   SizedBox(
                     height: size.height/45.71428571428571,
                   ),
-                  Text(myList[index].event,
-                      style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600)),
+
                 ],
               ),
             ),

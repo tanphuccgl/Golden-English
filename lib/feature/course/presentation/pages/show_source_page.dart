@@ -71,7 +71,7 @@ class _ShowCoursePageState extends State<ShowCoursePage> {
                   ],
                 ),
                 SizedBox(
-                  height: size.height/32,
+                  height: size.height / 32,
                 ),
                 Expanded(
                   child: GridView.count(
@@ -107,7 +107,8 @@ class _ShowCoursePageState extends State<ShowCoursePage> {
                                       //   width: 42,
                                       // ),
 
-                                      Container(width: size.width/3.6,
+                                      Container(
+                                        width: size.width / 3.6,
                                         child: Center(
                                           child: Text(data?.nameCourse ?? "",
                                               textAlign: TextAlign.center,
@@ -121,7 +122,7 @@ class _ShowCoursePageState extends State<ShowCoursePage> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: size.height/80,
+                                        height: size.height / 80,
                                       ),
                                       Text("${data.amount} students",
                                           style: TextStyle(
@@ -129,7 +130,7 @@ class _ShowCoursePageState extends State<ShowCoursePage> {
                                               fontSize: 10,
                                               fontWeight: FontWeight.w600)),
                                       SizedBox(
-                                        height: size.height/45.71428571428571,
+                                        height: size.height / 45.71428571428571,
                                       ),
                                       Text("Study in ${data.during} weeks",
                                           style: TextStyle(
@@ -137,7 +138,7 @@ class _ShowCoursePageState extends State<ShowCoursePage> {
                                               fontSize: 11,
                                               fontWeight: FontWeight.w600)),
                                       SizedBox(
-                                        height: size.height/45.71428571428571,
+                                        height: size.height / 45.71428571428571,
                                       ),
 
                                       data.schedule == "2"
@@ -163,36 +164,35 @@ class _ShowCoursePageState extends State<ShowCoursePage> {
                                   ),
                                 ),
                               ),
-                              Positioned(
-                                  right: -10,
-                                  top: -10,
-                                  child: IconButton(
-                                      icon: CircleAvatar(
-                                        backgroundColor:
-                                            Colors.deepOrangeAccent,
-                                        child: Icon(
-                                          Icons.delete,
-                                          size: 20,
-                                          color: kPrimaryWhiteColor,
+                              data.isCheck == 2
+                                  ? Positioned(
+                                      right: -10,
+                                      top: -10,
+                                      child: IconButton(
+                                        icon: CircleAvatar(
+                                          backgroundColor:
+                                              Colors.deepOrangeAccent,
+                                          child: Icon(
+                                            Icons.work_outline,
+                                            size: 20,
+                                            color: kPrimaryWhiteColor,
+                                          ),
                                         ),
-                                      ),
-                                      onPressed: () {
-                                        AlertDialog2.yesAbortDialog(
-                                            context: context,
-                                            title: "Delete",
-                                            body:
-                                                "Do you want to delete the Course ${data?.nameCourse}?",
-                                            onPressed: () {
-                                              deleteCourse(
-                                                  id: data.sId,
-                                                  function: () {
-                                                    showSuccess();
-                                                  },
-                                                  function2: () {
-                                                    showError();
-                                                  });
-                                            });
-                                      })),
+                                      ))
+                                  : Positioned(
+                                      right: -10,
+                                      top: -10,
+                                      child: IconButton(
+                                        icon: CircleAvatar(
+                                          backgroundColor:
+                                              Colors.deepOrangeAccent,
+                                          child: Icon(
+                                            Icons.work_off_outlined,
+                                            size: 20,
+                                            color: kPrimaryWhiteColor,
+                                          ),
+                                        ),
+                                      )),
                             ],
                           ),
                         );

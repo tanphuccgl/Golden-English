@@ -30,8 +30,8 @@ class _ListViewSettingRoomState extends State<ListViewSettingRoom> {
   Widget build(BuildContext context) {
     ItemsRoom item1 = new ItemsRoom(
         title: "Show Room",
-        subtitle: "March, Wednesday",
-        event: "${""} Classes",
+        subtitle: "View existing classrooms and edit classrooms",
+
         img: "assets/icons/showroom.png",
         function: () {
           Navigator.push(context, MaterialPageRoute(builder: (context)=>ShowRoomPage()));
@@ -39,9 +39,9 @@ class _ListViewSettingRoomState extends State<ListViewSettingRoom> {
         });
 
     ItemsRoom item2 = new ItemsRoom(
-      title: "Add Room",
-      subtitle: "Bocali, Apple",
-      event: "4 Items",
+      title: "Create room",
+      subtitle: "Add a new classroom",
+
       img: "assets/icons/add.png",function: (){
       Navigator.push(context, MaterialPageRoute(builder: (context)=>AddRoomPage()));
 
@@ -50,35 +50,16 @@ class _ListViewSettingRoomState extends State<ListViewSettingRoom> {
 
     ItemsRoom item3 = new ItemsRoom(
       title: "Search",
-      subtitle: "Lucy Mao going to Office",
-      event: "",
+      subtitle: "Search for classrooms by name",
+
       img: "assets/icons/search.png",function: (){
       Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchRoomPage()));
 
     }
     );
 
-    ItemsRoom item4 = new ItemsRoom(
-      title: "Activity",
-      subtitle: "Rose favirited your Post",
-      event: "",
-      img: "assets/logos/ic_launcher.png",
-    );
 
-    ItemsRoom item5 = new ItemsRoom(
-      title: "To do",
-      subtitle: "Homework, Design",
-      event: "4 Items",
-      img: "assets/logos/ic_launcher.png",
-    );
-
-    ItemsRoom item6 = new ItemsRoom(
-      title: "Settings",
-      subtitle: "",
-      event: "2 Items",
-      img: "assets/logos/ic_launcher.png",
-    );
-    List<ItemsRoom> myList = [item1, item2, item3, item4, item5, item6];
+    List<ItemsRoom> myList = [item1, item2, item3,];
 Size size= MediaQuery.of(context).size;
     return ListView.builder(
       itemBuilder: (context, index) {
@@ -116,11 +97,7 @@ Size size= MediaQuery.of(context).size;
                   SizedBox(
                     height: size.height/45.71428571428571,
                   ),
-                  Text(myList[index].event,
-                      style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600)),
+
                 ],
               ),
             ),

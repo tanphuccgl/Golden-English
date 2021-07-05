@@ -64,7 +64,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
                 Row(
                   children: [
                     Text(
-                      "Add Course",
+                      "Create Course",
                       style: TextStyle(
                           color: kPrimaryOrangeColor,
                           fontWeight: FontWeight.bold,

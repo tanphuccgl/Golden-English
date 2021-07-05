@@ -24,4 +24,21 @@ class ApiCourse {
       debugPrint(e);
     }
   }
+
+  static Future<CourseResponseModel> getDataed() async {
+    try {
+      final response = await Dio().get('$mainUrl/coursed',
+          options: new Options(headers: {
+            'auth-token': '${getCurrentUser().token}',
+          }));
+      print("Get Link Coursed: $mainUrl/coursed");
+      print("Get Coursed: ${response.data}");
+      print("Status Get Coursed: ${response.statusCode}");
+      return CourseResponseModel.fromJson(response.data);
+
+      //return (reponse.data as List).map((e) => Country.fromJson(e)).toList();
+    } catch (e) {
+      debugPrint(e);
+    }
+  }
 }

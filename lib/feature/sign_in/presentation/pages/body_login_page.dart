@@ -6,6 +6,7 @@ import 'package:SchoolManagementSystem/feature/home/presentation/pages/home_page
 import 'package:SchoolManagementSystem/feature/sign_in/presentation/manager/login_bloc.dart';
 import 'package:SchoolManagementSystem/feature/sign_in/presentation/manager/login_event.dart';
 import 'package:SchoolManagementSystem/feature/sign_in/presentation/manager/login_state.dart';
+import 'package:SchoolManagementSystem/feature/sign_in/presentation/pages/forgot_pass_page.dart';
 import 'package:SchoolManagementSystem/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -69,8 +70,8 @@ class _BodyLoginPageState extends State<BodyLoginPage> {
                   _stayAndForgot(
                     value1: _checkBox,
                     onPressed: () {
-                      // Navigator.pushReplacementNamed(
-                      //     context, PageRoutes.forgotPassPage);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPassPage()));
+
                     },
                   ),
                   _button(
@@ -118,8 +119,8 @@ class _BodyLoginPageState extends State<BodyLoginPage> {
                   _stayAndForgot(
                     value1: _checkBox,
                     onPressed: () {
-                      // Navigator.pushReplacementNamed(
-                      //     context, PageRoutes.forgotPassPage);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPassPage()));
+
                     },
                   ),
                   _button(
@@ -291,6 +292,7 @@ class _BodyLoginPageState extends State<BodyLoginPage> {
                         fontWeight: FontWeight.w500),
                   ),
                 ),
+
               ],
             ),
           ),
@@ -298,7 +300,7 @@ class _BodyLoginPageState extends State<BodyLoginPage> {
             child: TextButton(
               onPressed: onPressed,
               child: Text(
-                "",
+                "Forgotten Password?",
                 style: TextStyle(
                     color: Colors.grey,
                     fontSize: 12,

@@ -37,23 +37,26 @@ class _DetailRoomPageState extends State<DetailRoomPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
 
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: kPrimaryOrangeColor,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: kPrimaryOrangeColor,
           ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        body: widget.data!=null?Padding(
+      ),
+      body: widget.data != null
+          ? Padding(
           padding: EdgeInsets.only(left: 25, right: 25),
           child: SingleChildScrollView(
             child: Container(
@@ -61,116 +64,190 @@ class _DetailRoomPageState extends State<DetailRoomPage> {
               width: size.width,
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Detail Room",
-                        style: TextStyle(
-                            color: kPrimaryOrangeColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: size.height/32,
-                  ),
-                  Row(children: [
-                    Text(
-                      "    Room Name: ${widget.data.nameRoom}",
-                      style: TextStyle(color: kPrimaryOrangeColor),
-                    )
-                  ]),
-                  SizedBox(
-                    height: size.height/64,
-                  ),
-                  Row(children: [
-                    Text(
-                      "    Capacity: ${widget.data.capacity.toString()}",
-                      style: TextStyle(color: kPrimaryOrangeColor),
-                    )
-                  ]),
-                  SizedBox(
-                    height: size.height/32,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "Edit Room",
-                        style: TextStyle(
-                            color: kPrimaryOrangeColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: size.height/32,
-                  ),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        _buildMenu(
-                          title: "Change Room Name",
-                          icon: "assets/icons/ic_launcher.png",
-                          onPress: () => {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ChangeNameRoomPage(
-                                          data: widget.data,
-                                        )))
-                            // Navigator.pushReplacementNamed(
-                            //     context, PageRoutes.changeCourseNamePage)
-                          },
-                        ),
-                        _buildMenu(
-                          title: "Change Capacity",
-                          icon: "assets/icons/ic_launcher.png",
-                          onPress: () => {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ChangeCapacityPage(
-                                          data: widget.data,
-                                        )))
-                            // Navigator.pushReplacementNamed(
-                            //     context, PageRoutes.changeCourseNamePage)
-                          },
-                        ),
-                        _buildMenu(
-                          title: "Delete Room",
-                          icon: "assets/icons/ic_launcher.png",
-                          onPress: () {
-                            AlertDialog2.yesAbortDialog(
-                                context: context,
-                                title: "Delete",
-                                body:
-                                    "Do you want to delete the Room ${widget.data?.nameRoom}?",
-                                onPressed: () {
-                                  deleteRoom(
-                                      id: widget.data.sId,
-                                      function: () {
-                                        showSuccessDelete();
-                                      },
-                                      function2: () {
-                                        showErrorDelete();
-                                      });
-                                });
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              Row(
+              children: [
+              Text(
+              "Detail Room",
+                style: TextStyle(
+                    color: kPrimaryOrangeColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25),
               ),
+              ],
             ),
+            SizedBox(
+              height: size.height / 32,
+            ),
+            Row(children: [
+              Text(
+                "    Room Name: ${widget.data.nameRoom}",
+                style: TextStyle(color: kPrimaryOrangeColor),
+              )
+            ]),
+            SizedBox(
+              height: size.height / 64,
+            ),
+            Row(children: [
+              Text(
+                "    Capacity: ${widget.data.capacity.toString()}",
+                style: TextStyle(color: kPrimaryOrangeColor),
+              )
+            ]),
+            SizedBox(
+              height: size.height / 64,
+            ),
+            Row(children: [
+              Text(
+                widget.data.lichchan.length != 0 ||
+                    widget.data.lichle.length != 0
+                    ? "    Current Status: Full"
+                    : "    Current Status: Empty",
+                style: TextStyle(color: kPrimaryOrangeColor),
+              )
+            ]),
+            SizedBox(
+              height: size.height / 64,
+            ),
+            Row(children: [
+            Container(
+            width: size.width / 1.161290322580645,
+              height: size.height / 21.33333333333333,
+              child: Text(
+                    widget.data.lichchan.length != 0 ||
+                        widget.data.lichle.length != 0
+                        ? "    Course In Charge: ${widget.data.lichchan.map((
+                      e) => e.nameCourse!=null?e.nameCourse:"").toList()} , ${widget.data.lichle.map((
+                      e) => e.nameCourse!=null?e.nameCourse:"").toList()}"
+                      : "    Course In Charge: No information",
+              style: TextStyle(color: kPrimaryOrangeColor),
+              maxLines: 3,
+              softWrap: true,
+            ),
+          )
+          ]),
+      SizedBox(
+        height: size.height / 32,
+      ),
+      Row(
+        children: [
+          Text(
+            "Edit Room",
+            style: TextStyle(
+                color: kPrimaryOrangeColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 25),
           ),
-        ):Center(child: SpinkitLoading(),));
+        ],
+      ),
+      SizedBox(
+        height: size.height / 32,
+      ),
+      Expanded(
+        child: Column(
+          children: [
+            widget.data.lichchan.length != 0 ||
+                widget.data.lichle.length != 0
+                ?     _buildMenu2(
+              title: "Change Room Name",
+              icon: "assets/icons/ic_launcher.png",
+              onPress: () =>
+              {
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) =>
+                //             ChangeNameRoomPage(
+                //               data: widget.data,
+                //             )))
+
+              },
+            ):  _buildMenu(
+              title: "Change Room Name",
+              icon: "assets/icons/ic_launcher.png",
+              onPress: () =>
+              {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ChangeNameRoomPage(
+                              data: widget.data,
+                            )))
+                // Navigator.pushReplacementNamed(
+                //     context, PageRoutes.changeCourseNamePage)
+              },
+            ),
+            widget.data.lichchan.length != 0 ||
+                widget.data.lichle.length != 0
+                ?    _buildMenu2(
+              title: "Change Capacity",
+              icon: "assets/icons/ic_launcher.png",
+              onPress: () =>
+              {
+
+              },
+            ): _buildMenu(
+              title: "Change Capacity",
+              icon: "assets/icons/ic_launcher.png",
+              onPress: () =>
+              {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ChangeCapacityPage(
+                              data: widget.data,
+                            )))
+                // Navigator.pushReplacementNamed(
+                //     context, PageRoutes.changeCourseNamePage)
+              },
+            ),
+            _buildMenu(
+              title: "Delete Room",
+              icon: "assets/icons/ic_launcher.png",
+              onPress: () {
+                AlertDialog2.yesAbortDialog(
+                    context: context,
+                    title: "Delete",
+                    body:
+                    widget.data.lichchan.length != 0 ||
+                        widget.data.lichle.length != 0
+                        ?      "Do you want to delete the Room ${widget.data?.nameRoom}?\n\n"
+                        "Warring: Room with courses":
+                    "Do you want to delete the Room ${widget.data?.nameRoom}?"   ,
+                    onPressed: () {
+                      deleteRoom(
+                          id: widget.data.sId,
+                          function: () {
+                            showSuccessDelete();
+                          },
+                          function2: () {
+                            showErrorDelete();
+                          });
+                    });
+              },
+            ),
+          ],
+        ),
+      ),
+      ],
+    ),
+    ),
+    ),
+    )
+        : Center(
+    child: SpinkitLoading
+    (
+    )
+    ,
+    )
+    );
   }
 
   Widget _buildMenu({String title, String icon, Function onPress}) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10),
@@ -188,12 +265,45 @@ class _DetailRoomPageState extends State<DetailRoomPage> {
             SizedBox(width: size.width / 18),
             Expanded(
                 child: Text(
-              title,
-              style: TextStyle(color: Colors.white),
-            )),
+                  title,
+                  style: TextStyle(color: kPrimaryOrange2Color),
+                )),
             Icon(
               Icons.arrow_forward_ios,
-              color: kPrimaryWhiteColor,
+              color: kPrimaryOrange2Color,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  Widget _buildMenu2({String title, String icon, Function onPress}) {
+    Size size = MediaQuery
+        .of(context)
+        .size;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10),
+      child: FlatButton(
+        padding: EdgeInsets.all(20),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        color: kPrimaryOrangeColor,
+        onPressed: onPress,
+        child: Row(
+          children: [
+            Image.asset(
+              icon,
+              width: size.width / 16.36363636363636,
+            ),
+            SizedBox(width: size.width / 18),
+            Expanded(
+                child: Text(
+                  title,
+                  style: TextStyle(color: kPrimaryOrange2Color.withOpacity(0.5)),
+                )),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: kPrimaryOrange2Color.withOpacity(0.5),
             ),
           ],
         ),
@@ -258,7 +368,8 @@ class _DetailRoomPageState extends State<DetailRoomPage> {
       title: "FAILED",
       description: "Room deletion failed",
       onPressed: () {
-        Navigator.pushReplacementNamed(context, PageRoutes.showCoursePage);
+        Navigator.pop(context);
+
       },
     );
     showDialog(

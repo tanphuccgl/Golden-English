@@ -50,7 +50,7 @@ class _AddRoomPageState extends State<AddRoomPage> {
                   Row(
                     children: [
                       Text(
-                        "Add Room",
+                        "Create Room",
                         style: TextStyle(
                             color: kPrimaryOrangeColor,
                             fontWeight: FontWeight.bold,

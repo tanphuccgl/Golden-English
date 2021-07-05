@@ -47,7 +47,8 @@ Future<bool> addCourse(
   }
 }
 
-Future<bool> deleteCourse({@required String id,Function function,Function function2}) async {
+Future<bool> deleteCourse(
+    {@required String id, Function function, Function function2}) async {
   final response = await client.delete(
     "$mainUrl/deletecourse/$id",
     headers: {
@@ -72,7 +73,8 @@ Future<bool> putNameCourse(
     {@required String idCourse,
     @required String nameCourse,
     @required Function function,
-    @required Function function2,@required Function function3}) async {
+    @required Function function2,
+    @required Function function3}) async {
   var body = jsonEncode({'nameCourse': nameCourse});
   final response = await client.put(
     "$mainUrl/changenamecourse/$idCourse",
@@ -90,19 +92,19 @@ Future<bool> putNameCourse(
   if (response.statusCode == 200 || response.statusCode == 201) {
     function();
     return true;
-
-  }else if(response.statusCode==402)
-    {
-      function2();
-    }
-  else {
+  } else if (response.statusCode == 402) {
+    function2();
+  } else {
     function3();
     throw ServerException();
   }
 }
 
 Future<bool> putNumberofStudent(
-    {@required String id, @required int amount,@required Function function,@required Function function2}) async {
+    {@required String id,
+    @required int amount,
+    @required Function function,
+    @required Function function2}) async {
   var body = jsonEncode({'amount': amount});
   final response = await client.put(
     "$mainUrl/changeamountcourse/$id",
@@ -126,8 +128,12 @@ Future<bool> putNumberofStudent(
     throw ServerException();
   }
 }
+
 Future<bool> putSchedule(
-    {@required String id, @required String schedule,@required Function function,@required Function function2}) async {
+    {@required String id,
+    @required String schedule,
+    @required Function function,
+    @required Function function2}) async {
   var body = jsonEncode({'schedule': schedule});
   final response = await client.put(
     "$mainUrl/changeschedulecourse/$id",
@@ -152,3 +158,53 @@ Future<bool> putSchedule(
   }
 }
 
+Future<bool> putIsCheck(
+    {@required String id,
+    @required Function function,
+    @required Function function2}) async {
+  final response = await client.put(
+    "$mainUrl/changecourseischeck/$id",
+    headers: {
+      "Accept": "application/json",
+      "content-type": "application/json",
+      'auth-token': '${getCurrentUser().token}',
+      // k co header la failed 415
+    },
+  );
+  log("Put Change Course IsCheck: " + "$mainUrl/changecourseischeck/$id");
+  log("Response Code Put Change Course IsCheck : ${response.statusCode}");
+  if (response.statusCode == 200 || response.statusCode == 201) {
+    function();
+    return true;
+  } else {
+    function2();
+
+    throw ServerException();
+  }
+}
+Future<bool> postAddToCalendar(
+    {
+      @required Function function,
+      @required Function function2,
+      }) async {
+
+  final response = await client.post(
+    "$mainUrl/sapxepkhoahoc",
+    headers: {
+      "Accept": "application/json",
+      "content-type": "application/json",
+      'auth-token': '${getCurrentUser().token}',
+      // k co header la failed 415
+    },
+  );
+  log("Post Add to Celendar:" + "$mainUrl/sapxepkhoahoc");
+  log("Response Code Post Add to Celendar: ${response.statusCode}");
+  if (response.statusCode == 200 || response.statusCode == 201) {
+    function();
+    return true;
+  }
+   else {
+    function2();
+    throw ServerException();
+  }
+}

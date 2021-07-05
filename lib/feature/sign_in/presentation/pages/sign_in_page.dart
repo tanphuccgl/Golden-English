@@ -26,16 +26,16 @@ class _SignInPageState extends State<SignInPage> {
   BlocProvider<LoginBloc> buildBody(BuildContext context) {
     return BlocProvider(create: (_) => sl<LoginBloc>(), child: SingleChildScrollView(child: BodyLoginPage()));
   }
-// Future<bool> onWillPop() async {
-//   Navigator.pushAndRemoveUntil(
-//     context,
-//     MaterialPageRoute(builder: (context) => OnBoardingScreen()),
-//         (Route<dynamic> route) => false,
-//   );
-//
-//
-//   return Future.value(true);
-// //  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
-// }
+Future<bool> onWillPop() async {
+  Navigator.pop(context);
+  Navigator.pop(context);
+  Navigator.pop(context);
+
+
+
+
+  return Future.value(true);
+//  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+}
 
 }

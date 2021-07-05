@@ -165,7 +165,22 @@ class _ShowRoomPageState extends State<ShowRoomPage> {
                                           ),
                                         ),
                                       ),
-                                      Positioned(
+                                      data.lichchan.length != 0 ||
+                                          data.lichle.length != 0
+                                          ?  Positioned(
+                                          right: -10,
+                                          top: -10,
+                                          child: IconButton(
+                                              icon: CircleAvatar(
+                                                backgroundColor:
+                                                Colors.deepOrangeAccent,
+                                                child: Icon(
+                                                  Icons.work_outline,
+                                                  size: 20,
+                                                  color: kPrimaryWhiteColor,
+                                                ),
+                                              ),
+                                            )):  Positioned(
                                           right: -10,
                                           top: -10,
                                           child: IconButton(
@@ -173,29 +188,12 @@ class _ShowRoomPageState extends State<ShowRoomPage> {
                                                 backgroundColor:
                                                     Colors.deepOrangeAccent,
                                                 child: Icon(
-                                                  Icons.delete,
+                                                  Icons.work_off_outlined,
                                                   size: 20,
                                                   color: kPrimaryWhiteColor,
                                                 ),
                                               ),
-                                              onPressed: () {
-                                                AlertDialog2.yesAbortDialog(
-                                                    context: context,
-                                                    title: "Delete",
-                                                    body:
-                                                        "Do you want to delete the room ${data?.nameRoom}?",
-                                                    onPressed: () {
-                                                      deleteRoom(
-                                                          id: data.sId,
-                                                          function: () {
-                                                            showSuccess();
-                                                          },
-                                                          function2: () {
-                                                            showError();
-                                                          });
-                                                      showSuccess();
-                                                    });
-                                              })),
+                                             )),
                                     ],
                                   ),
                                 );

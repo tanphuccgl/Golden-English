@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text("Phuc Entertaiment",
+                    Text("GOLDEN ENGLISH",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 25,

@@ -1,4 +1,5 @@
 import 'package:SchoolManagementSystem/core/utils/page_router.dart';
+import 'package:SchoolManagementSystem/feature/about_us/presentation/pages/about_us_page.dart';
 import 'package:SchoolManagementSystem/feature/calendar/presentation/pages/calendar_page.dart';
 import 'package:SchoolManagementSystem/feature/course/presentation/pages/add_course_page.dart';
 import 'package:SchoolManagementSystem/feature/course/presentation/pages/change_name_page.dart';
@@ -17,6 +18,8 @@ import 'package:SchoolManagementSystem/feature/room/presentation/pages/change_na
 import 'package:SchoolManagementSystem/feature/room/presentation/pages/room_page.dart';
 import 'package:SchoolManagementSystem/feature/room/presentation/pages/search_room_page.dart';
 import 'package:SchoolManagementSystem/feature/room/presentation/pages/show_room_page.dart';
+import 'package:SchoolManagementSystem/feature/settings/presentation/pages/change_pw_page.dart';
+import 'package:SchoolManagementSystem/feature/settings/presentation/pages/settings_page.dart';
 import 'package:SchoolManagementSystem/feature/sign_in/presentation/pages/sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:SchoolManagementSystem/core/utils/injection_container.dart' as di;
@@ -84,6 +87,11 @@ class _MyAppState extends State<MyApp> {
         PageRoutes.searchCoursePage: (context) => SearchCoursePage(),
 
         PageRoutes.calendarPage: (context) => CalendarPage(),
+        PageRoutes.aboutUsPage: (context) => AboutUsPage(),
+
+
+        PageRoutes.settingsPage: (context) => SettingsPage(),
+        PageRoutes.changePwPage: (context) => ChangePwPage(),
 
 
 

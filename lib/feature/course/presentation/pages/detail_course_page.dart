@@ -57,7 +57,7 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
             padding: EdgeInsets.only(left: 25, right: 25),
             child: SingleChildScrollView(
               child: Container(
-                height: size.height,
+                height: size.height + size.height / 12.8,
                 width: size.width,
                 child: Column(
                   children: [
@@ -73,7 +73,7 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                       ],
                     ),
                     SizedBox(
-                      height: size.height/32,
+                      height: size.height / 32,
                     ),
                     Row(children: [
                       Text(
@@ -82,7 +82,7 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                       )
                     ]),
                     SizedBox(
-                      height: size.height/64,
+                      height: size.height / 64,
                     ),
                     Row(children: [
                       Text(
@@ -91,7 +91,7 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                       )
                     ]),
                     SizedBox(
-                      height: size.height/64,
+                      height: size.height / 64,
                     ),
                     Row(children: [
                       Text(
@@ -104,7 +104,7 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                       )
                     ]),
                     SizedBox(
-                      height: size.height/64,
+                      height: size.height / 64,
                     ),
                     Row(children: [
                       Text(
@@ -113,7 +113,7 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                       )
                     ]),
                     SizedBox(
-                      height: size.height/64,
+                      height: size.height / 64,
                     ),
                     Row(children: [
                       Text(
@@ -122,7 +122,56 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                       )
                     ]),
                     SizedBox(
-                      height: size.height/64,
+                      height: size.height / 64,
+                    ),
+                    Row(children: [
+                      Text(
+                        widget.data.isCheck == 2
+                            ? "    Add to calendar: Added"
+                            : "    Add to calendar: Not yet added",
+                        style: TextStyle(color: kPrimaryOrangeColor),
+                      )
+                    ]),
+                    SizedBox(
+                      height: size.height / 64,
+                    ),
+                    widget.data.isCheck == 2
+                        ? _buildMenu2(
+                            title: "Add To Calendar",
+                            icon: "assets/icons/ic_launcher.png",
+                            onPress: () => {
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             ChangeCourseNamePage(
+                              //               data: widget.data,
+                              //             )))
+                              // Navigator.pushReplacementNamed(
+                              //     context, PageRoutes.changeCourseNamePage)
+                            },
+                          )
+                        : _buildMenu(
+                            title: "Add To Calendar",
+                            icon: "assets/icons/ic_launcher.png",
+                            onPress: () => {
+                              AlertDialog2.yesAbortDialog(
+                                  context: context,
+                                  title: "Add to Calendar",
+                                  body:  "If you add it to the schedule, you cannot change it"
+                                    ,
+                                  onPressed: () {
+                                   putIsCheck(id: widget.data.sId,);
+                                   postAddToCalendar(function: (){
+                                     showSuccessAdd();
+                                   }, function2: (){
+                                     showCancel();
+                                   });
+                                  })
+                            },
+                          ),
+                    SizedBox(
+                      height: size.height / 64,
                     ),
                     Row(
                       children: [
@@ -136,52 +185,94 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                       ],
                     ),
                     SizedBox(
-                      height: size.height/32,
+                      height: size.height / 32,
                     ),
                     Expanded(
                       child: Column(
                         children: [
-                          _buildMenu(
-                            title: "Change Course Name",
+                          widget.data.isCheck == 2
+                              ? _buildMenu2(
+                                  title: "Change Course Name",
+                                  icon: "assets/icons/ic_launcher.png",
+                                  onPress: () => {
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             ChangeCourseNamePage(
+                                    //               data: widget.data,
+                                    //             )))
+                                  },
+                                )
+                              : _buildMenu(
+                                  title: "Change Course Name",
+                                  icon: "assets/icons/ic_launcher.png",
+                                  onPress: () => {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ChangeCourseNamePage(
+                                                  data: widget.data,
+                                                )))
+                                    // Navigator.pushReplacementNamed(
+                                    //     context, PageRoutes.changeCourseNamePage)
+                                  },
+                                ),
+                          widget.data.isCheck == 2
+                              ? _buildMenu2(
+                                  title: "Change Number of Student",
+                                  icon: "assets/icons/ic_launcher.png",
+                                  onPress: () => {
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             ChangeNumberOfStudentPage(
+                                    //               data: widget.data,
+                                    //             )))
+                                  },
+                                )
+                              : _buildMenu(
+                                  title: "Change Number of Student",
+                                  icon: "assets/icons/ic_launcher.png",
+                                  onPress: () => {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ChangeNumberOfStudentPage(
+                                                  data: widget.data,
+                                                )))
+                                  },
+                                ),
+                          widget.data.isCheck == 2
+                              ? _buildMenu2(
+                                  title: "Change Schedule",
+                                  icon: "assets/icons/ic_launcher.png",
+                                  onPress: () => {},
+                                )
+                              : _buildMenu(
+                                  title: "Change Schedule",
+                                  icon: "assets/icons/ic_launcher.png",
+                                  onPress: () => {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ChangeSchedudlePage(
+                                                  data: widget.data,
+                                                )))
+                                  },
+                                ),
+                          widget.data.isCheck == 2
+                              ?   _buildMenu2(
+                            title: "Delete Course",
                             icon: "assets/icons/ic_launcher.png",
-                            onPress: () => {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          ChangeCourseNamePage(
-                                            data: widget.data,
-                                          )))
-                              // Navigator.pushReplacementNamed(
-                              //     context, PageRoutes.changeCourseNamePage)
+                            onPress: () {
+
                             },
-                          ),
-                          _buildMenu(
-                            title: "Change Number of Student",
-                            icon: "assets/icons/ic_launcher.png",
-                            onPress: () => {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          ChangeNumberOfStudentPage(
-                                            data: widget.data,
-                                          )))
-                            },
-                          ),
-                          _buildMenu(
-                            title: "Change Schedule",
-                            icon: "assets/icons/ic_launcher.png",
-                            onPress: () => {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ChangeSchedudlePage(
-                                            data: widget.data,
-                                          )))
-                            },
-                          ),
-                          _buildMenu(
+                          ):  _buildMenu(
                             title: "Delete Course",
                             icon: "assets/icons/ic_launcher.png",
                             onPress: () {
@@ -237,6 +328,43 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
       title: "SUCCESS",
       description: "Successful Course editing",
       onPressed: () {
+        Navigator.pop(context);
+        Navigator.pop(context);
+        Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, PageRoutes.showCoursePage);
+      },
+    );
+    showDialog(
+        context: context,
+        builder: (context) {
+          return alert;
+        });
+  }
+  void showCancelAdd() {
+    var alert = new AlertDialog1(
+      image: "cancel",
+      title: "FAILED",
+      description: "Add to failure calendar",
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+    showDialog(
+        context: context,
+        builder: (context) {
+          return alert;
+        });
+  }
+
+  void showSuccessAdd() {
+    var alert = new AlertDialog1(
+      image: "ok",
+      title: "SUCCESS",
+      description: "Successfully added to the calendar",
+      onPressed: () {
+        Navigator.pop(context);
+        Navigator.pop(context);
+        Navigator.pop(context);
         Navigator.pushReplacementNamed(context, PageRoutes.showCoursePage);
       },
     );
@@ -267,17 +395,50 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
             Expanded(
                 child: Text(
               title,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: kPrimaryOrange2Color),
             )),
             Icon(
               Icons.arrow_forward_ios,
-              color: kPrimaryWhiteColor,
+              color: kPrimaryOrange2Color,
             ),
           ],
         ),
       ),
     );
   }
+
+  Widget _buildMenu2({String title, String icon, Function onPress}) {
+    Size size = MediaQuery.of(context).size;
+
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 10),
+      child: FlatButton(
+        padding: EdgeInsets.all(20),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        color: kPrimaryOrangeColor,
+        onPressed: onPress,
+        child: Row(
+          children: [
+            Image.asset(
+              icon,
+              width: size.width / 16.36363636363636,
+            ),
+            SizedBox(width: size.width / 18),
+            Expanded(
+                child: Text(
+              title,
+              style: TextStyle(color: kPrimaryOrange2Color.withOpacity(0.5)),
+            )),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: kPrimaryOrange2Color.withOpacity(0.5),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
 
   void showSuccessDelete() {
     var alert = new AlertDialog1(
@@ -304,8 +465,8 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
       image: "cancel",
       title: "FAILED",
       description: "Course deletion failed",
-      onPressed: () {
-        Navigator.pushReplacementNamed(context, PageRoutes.showCoursePage);
+      onPressed: () {   Navigator.pop(context);
+
       },
     );
     showDialog(

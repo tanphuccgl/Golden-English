@@ -1,3 +1,4 @@
+import 'package:SchoolManagementSystem/feature/about_us/presentation/pages/about_us_page.dart';
 import 'package:SchoolManagementSystem/feature/calendar/presentation/pages/calendar_page.dart';
 import 'package:SchoolManagementSystem/feature/course/presentation/pages/add_course_page.dart';
 import 'package:SchoolManagementSystem/feature/course/presentation/pages/change_name_page.dart';
@@ -16,6 +17,8 @@ import 'package:SchoolManagementSystem/feature/room/presentation/pages/change_na
 import 'package:SchoolManagementSystem/feature/room/presentation/pages/room_page.dart';
 import 'package:SchoolManagementSystem/feature/room/presentation/pages/search_room_page.dart';
 import 'package:SchoolManagementSystem/feature/room/presentation/pages/show_room_page.dart';
+import 'package:SchoolManagementSystem/feature/settings/presentation/pages/change_pw_page.dart';
+import 'package:SchoolManagementSystem/feature/settings/presentation/pages/settings_page.dart';
 
 import 'package:SchoolManagementSystem/feature/sign_in/presentation/pages/sign_in_page.dart';
 
@@ -47,6 +50,12 @@ class PageRoutes{
   static const String searchCoursePage = SearchCoursePage.routeName;
 
   static const String calendarPage = CalendarPage.routeName;
+  static const String aboutUsPage = AboutUsPage.routeName;
+
+  static const String settingsPage = SettingsPage.routeName;
+  static const String changePwPage = ChangePwPage.routeName;
+
+
 
 
 

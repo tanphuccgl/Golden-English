@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:SchoolManagementSystem/core/api/api_room.dart';
 import 'package:SchoolManagementSystem/core/utils/constants.dart';
 import 'package:SchoolManagementSystem/core/utils/spinkit.dart';
 import 'package:SchoolManagementSystem/feature/home/presentation/pages/home_page.dart';
+import 'package:SchoolManagementSystem/feature/room/data/models/room_data.dart';
 import 'package:SchoolManagementSystem/feature/room/data/models/room_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -77,74 +80,36 @@ class _CalendarPageState extends State<CalendarPage> {
                   SizedBox(
                     height: size.height / 64,
                   ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Container(
-                            height: size.height / 1.28,
-                            child: SfCalendar(
-                              view: CalendarView.month,
-                              //  onTap: calendarTapped,
-                              firstDayOfWeek: 7,
-                              cellBorderColor: kPrimaryOrange2Color,
-                              todayHighlightColor: kPrimaryOrange2Color,
-                              //  initialDisplayDate: DateTime(2021, 03, 01, 08, 30),
-                              //initialSelectedDate: DateTime(2021, 03, 01, 08, 30),
-                              dataSource: MeetingDataSource(getAppointments()),
-                              selectionDecoration: BoxDecoration(
-                                color: Colors.transparent,
-                                border: Border.all(color: Colors.red, width: 2),
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(4)),
-                                shape: BoxShape.rectangle,
-                              ),
-                              showNavigationArrow: true,
+                  Column(
+                    children: [
+                      Container(
+                        height: size.width*1.5,width: size.width,
+                        child: SfCalendar(
+                          view: CalendarView.month,
+                   //       onTap: calendarTapped,
+                          firstDayOfWeek: 7,
+                          cellBorderColor: kPrimaryOrange2Color,
+                          todayHighlightColor: kPrimaryOrange2Color,
+                          //  initialDisplayDate: DateTime(2021, 03, 01, 08, 30),
+                          //initialSelectedDate: DateTime(2021, 03, 01, 08, 30),
+                          dataSource: MeetingDataSource(getAppointments()),
+                          selectionDecoration: BoxDecoration(
+                            color: Colors.transparent,
+                            border: Border.all(color: Colors.red, width: 2),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(4)),
+                            shape: BoxShape.rectangle,
+                          ),
+                          showNavigationArrow: true,
 
-                              monthViewSettings: MonthViewSettings(
-                                  appointmentDisplayMode:
-                                      MonthAppointmentDisplayMode.appointment),
-                            ),
+                          monthViewSettings: MonthViewSettings(
+                            appointmentDisplayMode:
+                                MonthAppointmentDisplayMode.appointment,
+                            appointmentDisplayCount: 6,
                           ),
-                          Text(
-                            "fadshfjl",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            "fadshfjl",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            "fadshfjl",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            "fadshfjl",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            "fadshfjl",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            "fadshfjl",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            "fadshfjl",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            "fadshfjl",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            "fadshfjl",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   )
                 ],
               )
@@ -160,78 +125,76 @@ class _CalendarPageState extends State<CalendarPage> {
       _endTimeText = '',
       _dateText = '',
       _timeDetails = '';
-  Color _headerColor, _viewHeaderColor, _calendarColor;
 
-  // void calendarTapped(CalendarTapDetails details) {
-  //         getAppointments().map((e) => e.)
-  //   if (details.targetElement == CalendarElement.calendarCell
-  //     ) {
-  //     print("Adf");
-  //     for (int i = 0; i <= getAppointments().length; i++)
-  //       {
-  //         final Meeting appointmentDetails = getAppointments()[i];
-  //
-  //         _subjectText = appointmentDetails.eventName;
-  //         // _dateText = DateFormat('MMMM dd, yyyy')
-  //         //     .format(appointmentDetails.startTime)
-  //         //     .toString();
-  //         _startTimeText =
-  //             DateFormat('hh:mm a').format(appointmentDetails.from).toString();
-  //         _endTimeText =
-  //             DateFormat('hh:mm a').format(appointmentDetails.to).toString();
-  //         if (appointmentDetails.isAllDay) {
-  //           _timeDetails = 'All day';
-  //         } else {
-  //           _timeDetails = '$_startTimeText - $_endTimeText';
-  //         }
-  //         showDialog(
-  //             context: context,
-  //             builder: (BuildContext context) {
-  //               return AlertDialog(
-  //                 title: Container(child: new Text('$_subjectText')),
-  //                 content: Container(
-  //                   height: 80,
-  //                   child: Column(
-  //                     children: <Widget>[
-  //                       Row(
-  //                         children: <Widget>[
-  //                           Text(
-  //                             '$_startTimeText',
-  //                             style: TextStyle(
-  //                               fontWeight: FontWeight.w400,
-  //                               fontSize: 20,
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                       Row(
-  //                         children: <Widget>[
-  //                           Text(''),
-  //                         ],
-  //                       ),
-  //                       Row(
-  //                         children: <Widget>[
-  //                           Text(_timeDetails,
-  //                               style: TextStyle(
-  //                                   fontWeight: FontWeight.w400, fontSize: 15)),
-  //                         ],
-  //                       )
-  //                     ],
-  //                   ),
-  //                 ),
-  //                 actions: <Widget>[
-  //                   new FlatButton(
-  //                       onPressed: () {
-  //                         Navigator.of(context).pop();
-  //                       },
-  //                       child: new Text('close'))
-  //                 ],
-  //               );
-  //             });
-  //       }
-  //
-  //   }
-  // }
+  void calendarTapped(CalendarTouchDetails details) {
+    print(details.targetElement);
+
+
+//     Meeting appointment = details.appointments.addAll(getAppointments());
+//     print(appointment);
+//   appointment=getAppointments();
+//     print(appointment[1]);
+//       final Meeting appointmentDetails =
+//           getAppointments()[ details.appointments.];
+// print( details.date.day);
+//       _subjectText = appointmentDetails.eventName;
+//       // _dateText = DateFormat('MMMM dd, yyyy')
+//       //     .format(appointmentDetails.startTime)
+//       //     .toString();
+//       _startTimeText =
+//           DateFormat('hh:mm a').format(appointmentDetails.from).toString();
+//       _endTimeText =
+//           DateFormat('hh:mm a').format(appointmentDetails.to).toString();
+//       if (appointmentDetails.isAllDay) {
+//         _timeDetails = 'All day';
+//       } else {
+//         _timeDetails = '$_startTimeText - $_endTimeText';
+//       }
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Container(child: new Text('$_subjectText')),
+            content: Container(
+              height: 80,
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        details.appointments.length.toString(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(''),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(_timeDetails,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400, fontSize: 15)),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: new Text('close'))
+            ],
+          );
+        });
+  }
 
   List<Meeting> getAppointments() {
     List<Meeting> meetings = <Meeting>[];
@@ -239,524 +202,126 @@ class _CalendarPageState extends State<CalendarPage> {
     DateTime startTime = DateTime(today.year, today.month, today.day);
     DateTime endTime =
         startTime.add(const Duration(hours: 23, minutes: 59, seconds: 59));
-    int indexRoom = 0;
-    int indexCourse = 0;
-    for (indexRoom = 0;
-        indexRoom <= roomResponseModel.data.length - 1;
-        indexRoom++) {
-      if (roomResponseModel.data[indexRoom] != null) {
-        for (indexCourse = 0;
-            indexCourse <=
-                roomResponseModel.data[indexRoom].lichchan.length - 1;
-            indexCourse++) {
-          if (roomResponseModel
-                  .data[indexRoom].lichchan[indexCourse].nameCourse !=
-              null) {
-            if (roomResponseModel
-                    .data[indexRoom].lichchan[indexCourse].during ==
-                2) {
-              if (indexCourse == 0) {
-                int a = 12;
-                for (int i = 1; i <= 6; i++) {
-                  if (i <= 3) {
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 2;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.deepOrangeAccent,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 3 && i <= 6) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.deepOrangeAccent,
-                        to: startTime,
-                        from: endTime));
-                  }
-                }
-              }
-              if (indexCourse == 1) {
-                int a = 12 + 14;
 
-                for (int i = 1; i <= 6; i++) {
-                  if (i <= 3) {
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 2;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.blue,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 3 && i <= 6) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.blue,
-                        to: startTime,
-                        from: endTime));
-                  }
-                }
-              }
-              if (indexCourse == 2) {
-                int a = 12 + 14 + 14;
 
-                for (int i = 1; i <= 6; i++) {
-                  if (i <= 3) {
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 2;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.orange,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 3 && i <= 6) {
-                    print(a);
+    for (int idroom = 0; idroom < roomResponseModel.data.length; idroom++) {
+      // for duyet room
+      if (roomResponseModel.data[idroom].lichchan.length != 0) {
+        var i = 1;
+        int tong = 0;
+        for (int lc = 0;
+            lc < roomResponseModel.data[idroom].lichchan.length;
+            lc++) {
+          // duyet tung phan tu trong array lich chan
+          for (int date = i;
+              date <
+                  (abc(tong, lc, idroom) * 7) +
+                      (roomResponseModel.data[idroom].lichchan[lc].during * 7);
+              date++) {
+            // log(abc(tong, lc, idroom).toString());
+            int c = 11;
+            c = c + date;
 
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.orange,
-                        to: startTime,
-                        from: endTime));
-                  }
-                }
-              }
-            }
-            if (roomResponseModel
-                    .data[indexRoom].lichchan[indexCourse].during ==
-                3) {
-              if (indexCourse == 0) {
-                int a = 12;
-                for (int i = 1; i <= 9; i++) {
-                  if (i <= 3) {
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 2;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.purple,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 3 && i <= 6) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.purple,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 6 && i <= 9) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a + 1);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.purple,
-                        to: startTime,
-                        from: endTime));
-                  }
-                }
-              }
-              if (indexCourse == 1) {
-                int a = 12 + 14;
-                for (int i = 1; i <= 9; i++) {
-                  if (i <= 3) {
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 2;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.green,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 3 && i <= 6) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.green,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 6 && i <= 9) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a + 1);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.green,
-                        to: startTime,
-                        from: endTime));
-                  }
-                }
-              }
-              if (indexCourse == 2) {
-                int a = 12 + 14 + 21;
-                for (int i = 1; i <= 9; i++) {
-                  if (i <= 3) {
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 2;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.black,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 3 && i <= 6) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.black45,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 6 && i <= 9) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a + 1);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichchan[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.black87,
-                        to: startTime,
-                        from: endTime));
-                  }
-                }
-              }
-            }
-          }
-        }
 
-        for (indexCourse = 0;
-            indexCourse <= roomResponseModel.data[indexRoom].lichle.length - 1;
-            indexCourse++) {
-          if (roomResponseModel
-                  .data[indexRoom].lichle[indexCourse].nameCourse !=
-              null) {
-            if (roomResponseModel.data[indexRoom].lichle[indexCourse].during ==
-                2) {
-              if (indexCourse == 0) {
-                int a = 13;
-                for (int i = 1; i <= 6; i++) {
-                  if (i <= 3) {
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 2;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.deepOrangeAccent,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 3 && i <= 6) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.deepOrangeAccent,
-                        to: startTime,
-                        from: endTime));
-                  }
-                }
-              }
-              if (indexCourse == 1) {
-                int a = 13 + 14;
+            i = abc(tong, lc + 1, idroom) * 7;
 
-                for (int i = 1; i <= 6; i++) {
-                  if (i <= 3) {
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 2;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.blue,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 3 && i <= 6) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.blue,
-                        to: startTime,
-                        from: endTime));
-                  }
-                }
-              }
-              if (indexCourse == 2) {
-                int a = 13 + 14 + 14;
+            startTime = DateTime(today.year, today.month, c);
+//log(c.toString());
+            DateTime endTime = startTime
+                .add(const Duration(hours: 23, minutes: 59, seconds: 59));
 
-                for (int i = 1; i <= 6; i++) {
-                  if (i <= 3) {
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 2;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.orange,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 3 && i <= 6) {
-                    print(a);
+            if ((startTime.weekday == DateTime.monday) ||
+                (startTime.weekday == DateTime.wednesday) ||
+                (startTime.weekday == DateTime.friday)) {
+           //   log("bang "+c.toString());
+              if(roomResponseModel.data[idroom].lichchan[lc].nameCourse!=null)
 
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.orange,
-                        to: startTime,
-                        from: endTime));
-                  }
+                {
+                  meetings.add(Meeting(
+                      eventName:
+                      " ${roomResponseModel.data[idroom].nameRoom} | ${roomResponseModel.data[idroom].lichchan[lc].nameCourse}",
+                      isAllDay: true,
+                      background: Colors.deepOrangeAccent,
+                      to: startTime,
+                      from: endTime));
                 }
-              }
-            }
-            if (roomResponseModel.data[indexRoom].lichle[indexCourse].during ==
-                3) {
-              if (indexCourse == 0) {
-                int a = 13;
-                for (int i = 1; i <= 9; i++) {
-                  if (i <= 3) {
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 2;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.purple,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 3 && i <= 6) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.purple,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 6 && i <= 9) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a + 1);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.purple,
-                        to: startTime,
-                        from: endTime));
-                  }
-                }
-              }
-              if (indexCourse == 1) {
-                int a = 13 + 14;
-                for (int i = 1; i <= 9; i++) {
-                  if (i <= 3) {
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 2;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.green,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 3 && i <= 6) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.green,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 6 && i <= 9) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a + 1);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.green,
-                        to: startTime,
-                        from: endTime));
-                  }
-                }
-              }
-              if (indexCourse == 2) {
-                int a = 13 + 14 + 21;
-                for (int i = 1; i <= 9; i++) {
-                  if (i <= 3) {
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 2;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.black,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 3 && i <= 6) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.black45,
-                        to: startTime,
-                        from: endTime));
-                  }
-                  if (i > 6 && i <= 9) {
-                    a = a + 1;
-                    startTime = DateTime(today.year, today.month, a + 1);
-                    a = a + 1;
-                    endTime = startTime.add(
-                        const Duration(hours: 23, minutes: 59, seconds: 59));
-                    meetings.add(Meeting(
-                        eventName: roomResponseModel
-                            .data[indexRoom].lichle[indexCourse].nameCourse,
-                        isAllDay: true,
-                        background: Colors.black87,
-                        to: startTime,
-                        from: endTime));
-                  }
-                }
-              }
+
+
+              // if (roomResponseModel.data[idroom].lichchan[lc]
+              //     .nameCourse !== undefined) {
+              //   temp.push(item);
+              // }
             }
           }
         }
       }
+      if (roomResponseModel.data[idroom].lichle.length != 0) {
+        var i = 1;
+        int tong = 0;
+        for (int lc = 0;
+        lc < roomResponseModel.data[idroom].lichle.length;
+        lc++) {
+          // duyet tung phan tu trong array lich chan
+          for (int date = i;
+          date <
+              (abc1(tong, lc, idroom) * 7) +
+                  (roomResponseModel.data[idroom].lichle[lc].during * 7);
+          date++) {
+            // log(abc(tong, lc, idroom).toString());
+            int c = 11;
+            c = c + date;
+
+
+            i = abc1(tong, lc + 1, idroom) * 7;
+
+            startTime = DateTime(today.year, today.month, c);
+//log(c.toString());
+            DateTime endTime = startTime
+                .add(const Duration(hours: 23, minutes: 59, seconds: 59));
+
+            if ((startTime.weekday == DateTime.tuesday) ||
+                (startTime.weekday == DateTime.thursday) ||
+                (startTime.weekday == DateTime.saturday)) {
+              //   log("bang "+c.toString());
+              if(roomResponseModel.data[idroom].lichle[lc].nameCourse!=null)
+                {
+                  meetings.add(Meeting(
+                      eventName:
+                      " ${roomResponseModel.data[idroom].nameRoom} | ${roomResponseModel.data[idroom].lichle[lc].nameCourse}",
+                      isAllDay: true,
+                      background: Colors.deepOrangeAccent,
+                      to: startTime,
+                      from: endTime));
+
+                }
+
+
+              // if (roomResponseModel.data[idroom].lichchan[lc]
+              //     .nameCourse !== undefined) {
+              //   temp.push(item);
+              // }
+            }
+          }
+        }
+      }
+
+
     }
 
     return meetings;
+  }
+
+  int abc(int tong, int lc, int a) {
+    roomResponseModel.data[a].lichchan.sublist(0, lc).forEach((element) {
+      tong = tong + element.during;
+    });
+    return tong;
+  }
+  int abc1(int tong, int lc, int a) {
+    roomResponseModel.data[a].lichle.sublist(0, lc).forEach((element) {
+      tong = tong + element.during;
+    });
+    return tong;
   }
 }
 
