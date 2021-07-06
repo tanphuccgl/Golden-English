@@ -164,10 +164,13 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
 
                                    putIsCheck(id: widget.data.sId,function:(){
                                      postAddToCalendar(function: (){
-                                       showSuccessAdd();
+
                                      }, function2: (){
-                                       showCancel();
+
                                      });
+                                     showSuccessAdd();
+                                   },function2: (){
+                                     showCancel();
                                    } );
 
                                   })

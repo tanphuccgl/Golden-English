@@ -78,9 +78,10 @@ Future<bool> putNameRoom(
   log("Body Put Name Room : ${body}");
   log("Response Code Put Name Room : ${response.statusCode}");
   if (response.statusCode == 200 || response.statusCode == 201) {
-
+function();
     return true;
   } else {
+    function2();
 
     throw ServerException();
   }
