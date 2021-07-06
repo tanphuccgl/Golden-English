@@ -161,12 +161,15 @@ class _DetailCoursePageState extends State<DetailCoursePage> {
                                   body:  "If you add it to the schedule, you cannot change it"
                                     ,
                                   onPressed: () {
-                                   putIsCheck(id: widget.data.sId,);
-                                   postAddToCalendar(function: (){
-                                     showSuccessAdd();
-                                   }, function2: (){
-                                     showCancel();
-                                   });
+
+                                   putIsCheck(id: widget.data.sId,function:(){
+                                     postAddToCalendar(function: (){
+                                       showSuccessAdd();
+                                     }, function2: (){
+                                       showCancel();
+                                     });
+                                   } );
+
                                   })
                             },
                           ),
