@@ -1,6 +1,6 @@
 # SchoolManagementSystem
+quản lí trường học
 
-A new Flutter project.
 
 ## Getting Started
 
